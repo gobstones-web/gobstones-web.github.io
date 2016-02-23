@@ -1,0 +1,39 @@
+{
+  "name": "poly-zoom",
+  "version": "0.5.3",
+  "authors": [
+    "Francisco López <donflopez@gmail.com>"
+  ],
+  "description": "Get an amazing zoom in your project using this element.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "zoom",
+    "drag",
+    "polyter"
+  ],
+  "main": "poly-zoom.html",
+  "license": "https://github.com/donflopez/poly-zoom/blob/master/LICENSE",
+  "homepage": "https://github.com/donflopez/poly-zoom",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/donflopez/poly-zoom.git"
+  },
+  "ignore": [
+    "/.*"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  },
+  "devDependencies": {},
+  "_release": "0.5.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.5.3",
+    "commit": "bccbfe8b299ed5727934c583a90517c6776fac1e"
+  },
+  "_source": "git://github.com/donflopez/poly-zoom.git",
+  "_target": "~0.5.3",
+  "_originalSource": "poly-zoom"
+}

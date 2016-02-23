@@ -20,10 +20,18 @@
     "tests"
   ],
   "dependencies": {
-    "gs-common": "~0.0.1-pre"
-    "gs-tablero": "~0.0.1-alpha"
+    "gs-common": "~0.0.1-pre",
+    "gs-tablero": "~0.0.0-alpha"
   },
   "resolutions": {
     "polymer": "^1.2.1"
+  },
+  "devDependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "iron-input": "polymerelements/iron-input#~1.0.8",
+    "iron-checked-element-behavior": "polymerelements/iron-checked-element-behavior#~1.0.4",
+    "paper-checkbox": "PolymerElements/paper-checkbox#~1.1.2",
+    "poly-zoom": "~0.5.3",
+    "juicy-jsoneditor": "~1.0.5"
   }
 }
