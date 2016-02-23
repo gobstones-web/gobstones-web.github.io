@@ -1,0 +1,66 @@
+<link rel="import" href="gs-celda.html">
+<dom-module id="gs-fila">
+  <template>
+    <style>
+      :host {
+        float: left;
+        clear: left;
+        display: flex;
+        margin-top: 4px;
+        height: 40px;
+      }
+      :host * {
+        box-sizing: content-box;
+      }
+
+      .gs-row-left,
+      .gs-row-right {
+        float: left;
+        height: 30px;
+        padding-top: 10px;
+        background-color: #BBB;
+        font-size: 16px;
+      }
+
+      .gs-row-right {
+        text-align: left;
+        width: 30px;
+        margin-left: 4px;
+        padding-left: 10px;
+      }
+
+      .gs-row-left {
+        width: 30px;
+        padding-right: 10px;
+        text-align: right;
+      }
+
+    </style>
+
+    <div class="gs-row-left">{{rowIndex}}</div>
+    <template is="dom-repeat" items="{{row}}" as="cell" index-as="columnIndex">
+      <gs-celda 
+        cell="{{cell}}"
+        row-index="{{rowIndex}}" 
+        rows-amount="{{rowsAmount}}"
+        column-index="{{columnIndex}}"
+        columns-amount="{{columnsAmount}}"
+      ></gs-celda>
+    </template>
+    <div class="gs-row-right">{{rowIndex}}</div>
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-fila',
+      properties: {
+        row: {
+          type: Array,
+          value: [],
+          observer: '_row_change'
+        }
+      },
+      _row_change: function() {}
+    });
+
+  </script>
+</dom-module>

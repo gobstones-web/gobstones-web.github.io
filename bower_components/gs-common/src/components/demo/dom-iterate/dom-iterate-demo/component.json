@@ -1,0 +1,9 @@
+{
+  "name": "dom-iterate-demo",
+  "imports": [
+    "../../dom-iterate.html",
+    "dom-iterate-demo-first.html", 
+    "../../../../../iron-input/iron-input.html",
+    "../../../../../paper-checkbox/paper-checkbox.html"
+  ]
+}

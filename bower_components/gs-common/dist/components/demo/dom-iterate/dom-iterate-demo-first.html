@@ -1,0 +1,63 @@
+<link rel="import" href="dom-iterate-demo-second.html">
+<dom-module id="dom-iterate-demo-first">
+  <template>
+    <style>
+      .fist-level,
+      .second-level {
+        float: left;
+        display: block;
+        color: white;
+        clear: both;
+        padding: 3px;
+        margin: 2px;
+      }
+
+      .fist-level {
+        background-color: red;
+      }
+
+      .second-level {
+        margin-left: 10px;
+        background-color: green;
+      }
+
+    </style>
+
+    <template id="first-level"
+      is="dom-iterate"
+      from="{{firstLevelFromIndex}}"
+      to="{{firstLevelToIndex}}"
+      include-last="{{firstLevelIncludeLast}}"
+      index-as="firstIndex">
+      <div class="fist-level">
+        <span><span>{{firstIndex}}</span> first level title</span>
+      </div>
+      <dom-iterate-demo-second
+        first-index="{{firstIndex}}"
+        second-level-to-index="{{secondLevelToIndex}}">
+      </dom-iterate-demo-second>
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'dom-iterate-demo-first',
+      properties: {
+        firstLevelFromIndex: {
+          type: Number,
+          value: 0
+        },
+        firstLevelToIndex: {
+          type: Number,
+          value: 3
+        },
+        firstLevelIncludeLast: {
+          type: Boolean,
+          value: false
+        }
+      },
+      ready: function() {}
+    });
+
+  </script>
+</dom-module>

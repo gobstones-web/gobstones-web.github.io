@@ -1,0 +1,7 @@
+{
+  "name": "dom-repeat-demo",
+  "imports": [
+    "dom-repeat-demo-first.html", 
+    "../../../../../iron-input/iron-input.html"
+  ]
+}

@@ -1,0 +1,88 @@
+<link rel="import" href="dom-repeat-demo-second.html">
+<dom-module id="dom-repeat-demo-first">
+  <template>
+    <style>
+      .fist-level,
+      .second-level {
+        float: left;
+        display: block;
+        color: white;
+        clear: both;
+        padding: 3px;
+        margin: 2px;
+      }
+
+      .fist-level {
+        background-color: red;
+      }
+
+      .second-level {
+        margin-left: 10px;
+        background-color: green;
+      }
+
+    </style>
+
+    <template id="first-level"
+      is="dom-repeat"
+      items="{{first_items}}"
+      as="firstItem">
+      <div class="fist-level">
+        <span><span>{{firstItem}}</span> first level title</span>
+      </div>
+      <dom-repeat-demo-second
+        first-item="{{firstItem}}"
+        second-level-to-index="{{secondLevelToIndex}}"
+        second-level-include-last="true">
+      </dom-repeat-demo-second>
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'dom-repeat-demo-first',
+      properties: {
+        firstLevelFromIndex: {
+          type: Number,
+          value: 0,
+          observer: 'mk_array'
+        },
+        firstLevelToIndex: {
+          type: Number,
+          value: 3,
+          observer: 'mk_array'
+        },
+        firstLevelIncludeLast: {
+          type: Boolean,
+          value: false,
+          observer: 'mk_array'
+        },
+        first_items: {
+          type: Array,
+          value: []
+        }
+      },
+      ready: function() {},
+      _calculate_points: function() {},
+      mk_array: function(count) {
+        var item, _from, _to;
+        _from = parseInt(this.firstLevelFromIndex);
+        _to = parseInt(this.firstLevelToIndex);
+        if (_from <= _to) {
+          this.firstLevelIncludeLast && (_to += 1);
+        } else {
+          this.firstLevelIncludeLast && (_to -= 1);
+        }
+        return this.first_items = (function() {
+          var _i, _results;
+          _results = [];
+          for (item = _i = _from; _from <= _to ? _i < _to : _i > _to; item = _from <= _to ? ++_i : --_i) {
+            _results.push(item);
+          }
+          return _results;
+        })();
+      }
+    });
+
+  </script>
+</dom-module>

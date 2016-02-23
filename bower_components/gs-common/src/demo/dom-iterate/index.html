@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>gobstones tablero demo</title>
+    <script src="../../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="demo.js"></script>
+    <link rel="stylesheet" type="text/css" href="demo.css">
+    <link rel="import" href="../../../polymer/polymer.html">
+    <link rel="import" href="../../dist/components/demo/dom-iterate/dom-repeat-demo.html">
+    <link rel="import" href="../../dist/components/demo/dom-iterate/dom-iterate-demo.html">
+    
+  </head>
+  <body class="demo" unresolved>
+    <div class="demo-header">
+      <p>
+       This example shows the sintactical difference between use dom-repeat to iterate over numbers and use iterator template
+      </p>
+      <p>
+       Feel free to inspect code
+      </p>
+    </div>
+    <div class="demo-left">
+      <p>An example of nested dom-iterate:</p>
+      <dom-iterate-demo></dom-iterate-demo>
+    </div>
+    <div class="demo-right">
+      <p>An example of nested dom-repeat:</p>
+      <dom-repeat-demo></dom-repeat-demo>
+    </div>
+  </body>
+</html>

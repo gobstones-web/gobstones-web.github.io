@@ -1,0 +1,28 @@
+{
+  "name": "gs-common",
+  "version": "0.0.1",
+  "authors": [
+    "alejandrocastrounqui <alejandrocastrounqui@gmail.com>"
+  ],
+  "description": "Gobstones Polymer common components",
+  "main": "dist/index.html",
+  "keywords": [
+    "polymer",
+    "gobstones"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "iron-input": "polymerelements/iron-input#~1.0.8",
+    "iron-checked-element-behavior": "polymerelements/iron-checked-element-behavior#~1.0.4",
+    "paper-checkbox": "PolymerElements/paper-checkbox#~1.1.2"
+  }
+}

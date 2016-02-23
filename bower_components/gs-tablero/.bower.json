@@ -1,0 +1,43 @@
+{
+  "name": "gs-tablero",
+  "version": "0.0.0-alpha",
+  "authors": [
+    "alejandrocastrounqui <alejandrocastrounqui@gmail.com>"
+  ],
+  "description": "Gobstones grid Polymer component (aka: tablero)",
+  "main": "dist/index.html",
+  "keywords": [
+    "polymer",
+    "gobstones"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "staging/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "gs-common": "~0.0.1-pre"
+  },
+  "devDependencies": {
+    "iron-input": "polymerelements/iron-input#~1.0.8",
+    "poly-zoom": "~0.5.3",
+    "juicy-jsoneditor": "~1.0.5"
+  },
+  "resolutions": {
+    "polymer": "^1.2.1"
+  },
+  "_release": "0.0.0-alpha",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.0-alpha",
+    "commit": "e5e6ae9065bcdf84d0c4f32b2cf66bc4786a34e0"
+  },
+  "_source": "git://github.com/gobstones/gs-tablero.git",
+  "_target": "~0.0.0-alpha",
+  "_originalSource": "gs-tablero"
+}

@@ -1,0 +1,12 @@
+<template id="second-level"
+  is="dom-iterate"
+  from="0" 
+  to="{{secondLevelToIndex}}"
+  index-as="secondIndex">
+  <div class="second-level">
+    <span>second level: </span>
+    <span>{{secondIndex}}</span>
+    <span> -> parent: </span>
+    <span>{{firstIndex}}</span>
+  </div>
+</template>

@@ -1,0 +1,29 @@
+{
+  "name": "gs-demos",
+  "version": "0.0.0",
+  "authors": [
+    "alejandrocastrounqui <alejandrocastrounqui@gmail.com>"
+  ],
+  "description": "Gobstones Polymer components demo",
+  "main": "dist/index.html",
+  "keywords": [
+    "polymer",
+    "gobstones"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "staging/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gs-common": "~0.0.1-pre"
+    "gs-tablero": "~0.0.1-alpha"
+  },
+  "resolutions": {
+    "polymer": "^1.2.1"
+  }
+}

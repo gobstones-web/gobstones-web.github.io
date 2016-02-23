@@ -1,0 +1,20 @@
+<div>
+  <span>firstLevelFromIndex: </span><br/>
+  <input type="text" is="iron-input" bind-value="{{firstLevelFromIndex}}" /><br/>
+  <span>firstLevelToIndex: </span><br/>
+  <input type="text" is="iron-input" bind-value="{{firstLevelToIndex}}" /><br/>
+  <span class="alert-box">second level 'from' index get hardcode '0' as example</span><br/>
+  <span>secondLevelToIndex: </span><br/>
+  <input type="text" is="iron-input" bind-value="{{secondLevelToIndex}}" /><br/>
+  <paper-checkbox checked="{{firstLevelIncludeLast}}">Include last item in first level</paper-checkbox><br/>
+  <template is="dom-if" if="{{firstLevelIncludeLast}}">last index included</template>
+  <template is="dom-if" if="{{!firstLevelIncludeLast}}">last index excluded</template>
+  <br/>
+  <dom-iterate-demo-first 
+    first-level-from-index="{{firstLevelFromIndex}}"
+    first-level-to-index="{{firstLevelToIndex}}"
+    first-level-include-last="{{firstLevelIncludeLast}}"
+    second-level-to-index="{{secondLevelToIndex}}">
+  </dom-iterate-demo-first>
+  <br/>
+</div>

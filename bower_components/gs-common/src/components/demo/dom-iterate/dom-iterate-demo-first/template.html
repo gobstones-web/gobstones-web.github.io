@@ -1,0 +1,14 @@
+<template id="first-level"
+  is="dom-iterate"
+  from="{{firstLevelFromIndex}}"
+  to="{{firstLevelToIndex}}"
+  include-last="{{firstLevelIncludeLast}}"
+  index-as="firstIndex">
+  <div class="fist-level">
+    <span><span>{{firstIndex}}</span> first level title</span>
+  </div>
+  <dom-iterate-demo-second
+    first-index="{{firstIndex}}"
+    second-level-to-index="{{secondLevelToIndex}}">
+  </dom-iterate-demo-second>
+</template>

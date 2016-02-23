@@ -1,0 +1,54 @@
+<dom-module id="dom-iterate-demo-second">
+  <template>
+    <style>
+      .fist-level,
+      .second-level {
+        float: left;
+        display: block;
+        color: white;
+        clear: both;
+        padding: 3px;
+        margin: 2px;
+      }
+
+      .fist-level {
+        background-color: red;
+      }
+
+      .second-level {
+        margin-left: 10px;
+        background-color: green;
+      }
+
+    </style>
+
+    <template id="second-level"
+      is="dom-iterate"
+      from="0" 
+      to="{{secondLevelToIndex}}"
+      index-as="secondIndex">
+      <div class="second-level">
+        <span>second level: </span>
+        <span>{{secondIndex}}</span>
+        <span> -> parent: </span>
+        <span>{{firstIndex}}</span>
+      </div>
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'dom-iterate-demo-second',
+      properties: {
+        secondLevelToIndex: {
+          type: Number,
+          value: 2
+        },
+        firstIndex: {
+          type: Number
+        }
+      }
+    });
+
+  </script>
+</dom-module>

@@ -1,0 +1,13 @@
+<template id="first-level"
+  is="dom-repeat"
+  items="{{first_items}}"
+  as="firstItem">
+  <div class="fist-level">
+    <span><span>{{firstItem}}</span> first level title</span>
+  </div>
+  <dom-repeat-demo-second
+    first-item="{{firstItem}}"
+    second-level-to-index="{{secondLevelToIndex}}"
+    second-level-include-last="true">
+  </dom-repeat-demo-second>
+</template>

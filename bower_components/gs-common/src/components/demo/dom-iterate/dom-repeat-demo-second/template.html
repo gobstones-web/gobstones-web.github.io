@@ -1,0 +1,12 @@
+<template id="second-level"
+  is="dom-repeat"
+  items="{{second_items}}"
+  second-level-include-last="true"
+  as="secondItem">
+  <div class="second-level">
+    <span>second level: </span>
+    <span>{{secondItem}}</span>
+    <span> -> parent: </span>
+    <span>{{firstItem}}</span>
+  </div>
+</template>

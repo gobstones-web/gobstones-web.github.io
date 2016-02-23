@@ -1,0 +1,4 @@
+{
+  "name": "dom-iterate-demo-first",
+  "imports": ["dom-iterate-demo-second.html"]
+}

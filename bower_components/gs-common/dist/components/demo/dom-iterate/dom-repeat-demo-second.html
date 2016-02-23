@@ -1,0 +1,87 @@
+<dom-module id="dom-repeat-demo-second">
+  <template>
+    <style>
+      .fist-level,
+      .second-level {
+        float: left;
+        display: block;
+        color: white;
+        clear: both;
+        padding: 3px;
+        margin: 2px;
+      }
+
+      .fist-level {
+        background-color: red;
+      }
+
+      .second-level {
+        margin-left: 10px;
+        background-color: green;
+      }
+
+    </style>
+
+    <template id="second-level"
+      is="dom-repeat"
+      items="{{second_items}}"
+      second-level-include-last="true"
+      as="secondItem">
+      <div class="second-level">
+        <span>second level: </span>
+        <span>{{secondItem}}</span>
+        <span> -> parent: </span>
+        <span>{{firstItem}}</span>
+      </div>
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'dom-repeat-demo-second',
+      properties: {
+        secondLevelToIndex: {
+          type: Number,
+          value: 2,
+          observer: 'mk_array'
+        },
+        secondLevelFromIndex: {
+          type: Number,
+          value: 0,
+          observer: 'mk_array'
+        },
+        firstItem: {
+          type: Number
+        },
+        second_items: {
+          type: Array,
+          value: []
+        },
+        secondLevelIncludeLast: {
+          type: Boolean,
+          value: false,
+          observer: 'mk_array'
+        }
+      },
+      mk_array: function(count) {
+        var item, _from, _to;
+        _from = parseInt(this.secondLevelFromIndex);
+        _to = parseInt(this.secondLevelToIndex);
+        if (_from <= _to) {
+          this.secondLevelIncludeLast && (_to += 1);
+        } else {
+          this.secondLevelIncludeLast && (_to -= 1);
+        }
+        return this.second_items = (function() {
+          var _i, _results;
+          _results = [];
+          for (item = _i = _from; _from <= _to ? _i < _to : _i > _to; item = _from <= _to ? ++_i : --_i) {
+            _results.push(item);
+          }
+          return _results;
+        })();
+      }
+    });
+
+  </script>
+</dom-module>

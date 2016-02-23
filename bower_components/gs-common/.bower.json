@@ -1,0 +1,37 @@
+{
+  "name": "gs-common",
+  "version": "0.0.1-pre",
+  "authors": [
+    "alejandrocastrounqui <alejandrocastrounqui@gmail.com>"
+  ],
+  "description": "Gobstones Polymer common components",
+  "main": "dist/index.html",
+  "keywords": [
+    "polymer",
+    "gobstones"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "iron-input": "polymerelements/iron-input#~1.0.8",
+    "iron-checked-element-behavior": "polymerelements/iron-checked-element-behavior#~1.0.4",
+    "paper-checkbox": "PolymerElements/paper-checkbox#~1.1.2"
+  },
+  "_release": "0.0.1-pre",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.1-pre",
+    "commit": "e16d9dd84c02b754f8a2af6fb7638d5125506d00"
+  },
+  "_source": "git://github.com/gobstones/gs-common.git",
+  "_target": "~0.0.1-pre",
+  "_originalSource": "gs-common"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "gs-tablero",
+  "imports": ["gs-fila.html"],
+  "require": []
+}

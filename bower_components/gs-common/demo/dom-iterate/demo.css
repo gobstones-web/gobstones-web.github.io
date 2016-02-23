@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+}
+
+.demo .demo-header {
+  width: 96%;
+  padding: 10px 2%;
+  background-color: #666;
+  color: #FFF;
+}
+.demo .demo-left {
+  margin: 2%;
+  float: left;
+  width: 46%;
+}
+.demo .demo-right {
+  margin: 2%;
+  float: right;
+  width: 46%;
+}

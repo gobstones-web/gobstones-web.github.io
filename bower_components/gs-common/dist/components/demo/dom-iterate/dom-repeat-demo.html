@@ -1,0 +1,80 @@
+<link rel="import" href="dom-repeat-demo-first.html">
+<link rel="import" href="../../../../../iron-input/iron-input.html">
+<dom-module id="dom-repeat-demo">
+  <template>
+    <style>
+      .fist-level,
+      .second-level {
+        float: left;
+        display: block;
+        color: white;
+        clear: both;
+        padding: 3px;
+        margin: 2px;
+      }
+
+      .fist-level {
+        background-color: red;
+      }
+
+      .second-level {
+        margin-left: 10px;
+        background-color: green;
+      }
+
+      .alert-box {
+        display: inline-block;
+        width: auto;
+        background-color: #FA3;
+        padding: 5px;
+        margin: 5px 0 5px 0;
+      }
+
+    </style>
+
+    <div>
+      <span>firstLevelFromIndex: </span><br/>
+      <input type="text" is="iron-input" bind-value="{{firstLevelFromIndex}}" /><br/>
+      <span>firstLevelToIndex: </span><br/>
+      <input type="text" is="iron-input" bind-value="{{firstLevelToIndex}}" /><br/>
+      <span class="alert-box">second level 'from' index get hardcode '0' as example</span><br/>
+      <span>secondLevelToIndex: </span><br/>
+      <input type="text" is="iron-input" bind-value="{{secondLevelToIndex}}" /><br/>
+      <paper-checkbox checked="{{firstLevelIncludeLast}}">Include last item in first level</paper-checkbox><br/>
+      <template is="dom-if" if="{{firstLevelIncludeLast}}">last index included</template>
+      <template is="dom-if" if="{{!firstLevelIncludeLast}}">last index excluded</template>
+      <br/>
+      <dom-repeat-demo-first 
+        first-level-from-index="{{firstLevelFromIndex}}"
+        first-level-to-index="{{firstLevelToIndex}}"
+        first-level-include-last="{{firstLevelIncludeLast}}"
+        second-level-to-index="{{secondLevelToIndex}}">
+      </dom-repeat-demo-first>
+      <br/>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'dom-repeat-demo',
+      properties: {
+        firstLevelFromIndex: {
+          type: Number,
+          value: 0
+        },
+        firstLevelToIndex: {
+          type: Number,
+          value: 3
+        },
+        firstLevelIncludeLast: {
+          type: Boolean,
+          value: false
+        },
+        secondLevelToIndex: {
+          type: Number,
+          value: 2
+        }
+      }
+    });
+
+  </script>
+</dom-module>
