@@ -1,0 +1,62 @@
+<link rel="import" href="dom-inject-simple-example.html">
+<link rel="import" href="dom-inject-nested-example.html">
+<link rel="import" href="../../dom-inject.html">
+<dom-module id="dom-inject-demo">
+  <template>
+    <style>
+      .simple-example,
+      .nested-example {
+        padding: 10px;
+      }
+
+    </style>
+
+    <div class="simple-example">
+      <button id="toggleSimple">Generar single element</button>
+      <br/>
+      <dom-inject element="{{simpleElement}}"></dom-inject>
+      <br/>
+    </div>
+    <div class="nested-example">
+      <button id="toggleNested">Generar nested element</button>
+      <br/>
+      <dom-inject element="{{nestedElement}}"></dom-inject>
+      <br/>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'dom-inject-demo',
+      properties: {
+        simpleElement: {
+          type: Object
+        }
+      },
+      listeners: {
+        'toggleSimple.tap': '_toggle_simple',
+        'toggleNested.tap': '_toggle_nested'
+      },
+      ready: function() {
+        this._simple = document.createElement('dom-inject-simple-example');
+        this.simpleElement = this._simple;
+        this._nested = document.createElement('dom-inject-nested-example');
+        return this.nestedElement = this._nested;
+      },
+      _toggle_simple: function() {
+        if (this.simpleElement) {
+          return this.simpleElement = null;
+        } else {
+          return this.simpleElement = this._simple;
+        }
+      },
+      _toggle_nested: function() {
+        if (this.nestedElement) {
+          return this.nestedElement = null;
+        } else {
+          return this.nestedElement = this._nested;
+        }
+      }
+    });
+
+  </script>
+</dom-module>

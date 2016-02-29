@@ -1,0 +1,38 @@
+{
+  "name": "gs-console",
+  "version": "0.0.0-pre",
+  "authors": [
+    "Nazareno Castro <nazarenomartincastro@gmail.com>"
+  ],
+  "description": "",
+  "main": "dist/index.html",
+  "keywords": [
+    "polymer",
+    "gobstones"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "paper-radio-group": "PolymerElements/paper-radio-group#^1.0.9",
+    "paper-radio-button": "PolymerElements/paper-radio-button#^1.1.1",
+    "paper-button": "PolymerElements/paper-button#^1.0.11"
+  },
+  "_release": "0.0.0-pre",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.0-pre",
+    "commit": "fc4567bf72af8d902879abf8efd20cd5875b9d8b"
+  },
+  "_source": "git://github.com/gobstones/gs-console.git",
+  "_target": "~0.0.0-pre",
+  "_originalSource": "gs-console",
+  "_direct": true
+}

@@ -1,0 +1,30 @@
+<link rel="import" href="dom-inject-simple-example.html">
+<dom-module id="dom-inject-nested-example">
+  <template>
+    <style>
+      :host {
+        background-color: green;
+        padding: 10px;
+        display: block;
+      }
+
+    </style>
+
+    <div class="level-one">
+      <div class="level-two">
+        dom-inject nested example
+        <dom-inject element="{{simpleElement}}"></dom-inject>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'dom-inject-nested-example',
+      ready: function() {
+        this._simple = document.createElement('dom-inject-simple-example');
+        return this.simpleElement = this._simple;
+      }
+    });
+
+  </script>
+</dom-module>

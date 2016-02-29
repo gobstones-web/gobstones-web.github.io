@@ -1,0 +1,20 @@
+<p id="demo-header">An example of <br> <code>&lt;gs-console&gt;</code>:</p>
+
+<div id="formPanel">
+  <div id="radioLabel">Select Type of Message</div>
+  <paper-radio-group selected="default" id="msgStyle">
+    <paper-radio-button name="default">Default</paper-radio-button>
+    <paper-radio-button name="success">Success</paper-radio-button>
+    <paper-radio-button name="info">Info</paper-radio-button>
+    <paper-radio-button name="warning">Warning</paper-radio-button>
+    <paper-radio-button name="error">Error</paper-radio-button>
+  </paper-radio-group>
+
+  <paper-button id="sendMsg">Send =></paper-button>
+
+  <textarea id="msg" placeholder="Add text" rows="4" cols="30"></textarea>
+</div>
+
+<gs-console id="console">
+
+</gs-console>

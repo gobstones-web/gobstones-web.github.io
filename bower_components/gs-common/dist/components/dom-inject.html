@@ -1,0 +1,43 @@
+<dom-module id="dom-inject">
+  <template>
+    <style>
+      
+    </style>
+
+
+  </template>
+  <script>
+    Polymer({
+      is: 'dom-inject',
+      properties: {
+        element: {
+          type: Object,
+          observer: '_update'
+        }
+      },
+      created: function() {},
+      ready: function() {
+        return this._update();
+      },
+      _reject: function() {
+        if (this._instance) {
+          Polymer.dom(this).parentNode.removeChild(this._instance);
+        }
+        return this._instance = void 0;
+      },
+      _inject: function(element) {
+        Polymer.dom(this).parentNode.appendChild(element);
+        return this._instance = this.element;
+      },
+      _update: function() {
+        if (this.element !== this._instance) {
+          this._reject();
+          if (typeof this.element === 'object' && this.element instanceof HTMLElement) {
+            return this._inject(this.element);
+          }
+        }
+      }
+    });
+
+  </script>
+</dom-module>

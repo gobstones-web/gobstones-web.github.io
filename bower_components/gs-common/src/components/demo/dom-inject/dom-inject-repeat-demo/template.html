@@ -1,0 +1,16 @@
+<div class="simple-example">
+  <button id="generate">Generar repeat element</button>
+  <br/>
+  <template is="dom-repeat" items="{{repeatElements}}" as="simpleElement" index-as="itemIndex">
+    <div class="container">
+      <div class="index">
+        Element index:<span>{{itemIndex}}</span>
+      </div>
+      <div class="item">
+        <dom-inject element="{{simpleElement}}"></dom-inject>
+      </div>
+      <div class="close" on-click="removeItem" item="{{simpleElement}}">x</div>
+    </div>
+  </template>
+  <br/>
+</div>

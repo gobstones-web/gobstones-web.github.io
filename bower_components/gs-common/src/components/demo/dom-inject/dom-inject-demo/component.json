@@ -1,0 +1,8 @@
+{
+  "name": "dom-inject-demo",
+  "imports": [
+    "dom-inject-simple-example.html",
+    "dom-inject-nested-example.html",
+    "../../dom-inject.html"
+  ]
+}

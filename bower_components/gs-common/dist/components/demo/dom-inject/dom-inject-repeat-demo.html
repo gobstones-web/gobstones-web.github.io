@@ -1,0 +1,90 @@
+<link rel="import" href="dom-inject-simple-example.html">
+<link rel="import" href="../../dom-inject.html">
+<dom-module id="dom-inject-repeat-demo">
+  <template>
+    <style>
+      .close {
+        float: left;
+        top: 0;
+        right: 0;
+        background-color: white;
+        cursor: pointer;
+      }
+
+      .index {
+        float: left;
+        clear: both;
+      }
+
+      .item {
+        clear: left;
+        float: left;
+      }
+
+      .container {
+        clear: left;
+        float: left;
+      }
+
+    </style>
+
+    <div class="simple-example">
+      <button id="generate">Generar repeat element</button>
+      <br/>
+      <template is="dom-repeat" items="{{repeatElements}}" as="simpleElement" index-as="itemIndex">
+        <div class="container">
+          <div class="index">
+            Element index:<span>{{itemIndex}}</span>
+          </div>
+          <div class="item">
+            <dom-inject element="{{simpleElement}}"></dom-inject>
+          </div>
+          <div class="close" on-click="removeItem" item="{{simpleElement}}">x</div>
+        </div>
+      </template>
+      <br/>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'dom-inject-repeat-demo',
+      properties: {
+        repeatElements: {
+          type: Array
+        }
+      },
+      listeners: {
+        'generate.tap': '_generate'
+      },
+      created: function() {
+        this.classes = ['red', 'orange', 'blue', 'green', 'pink'];
+        return this.current_class_index = 0;
+      },
+      next_class: function() {
+        var next_class;
+        next_class = this.classes[this.current_class_index];
+        if ((this.current_class_index += 1) === this.classes.length) {
+          this.current_class_index = 0;
+        }
+        return next_class;
+      },
+      ready: function() {
+        return this.repeatElements = [];
+      },
+      _generate: function() {
+        var _simple;
+        _simple = document.createElement('dom-inject-simple-example');
+        _simple.className += this.next_class();
+        return this.push('repeatElements', _simple);
+      },
+      removeItem: function(evnt) {
+        var index, item;
+        item = evnt.target.item;
+        index = this.repeatElements.indexOf(item);
+        return this.splice('repeatElements', index, 1);
+      }
+    });
+
+  </script>
+</dom-module>

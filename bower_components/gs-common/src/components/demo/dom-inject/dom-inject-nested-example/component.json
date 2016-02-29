@@ -1,0 +1,4 @@
+{
+  "name": "dom-inject-nested-example",
+  "imports": ["dom-inject-simple-example.html"]
+}

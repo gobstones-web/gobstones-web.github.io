@@ -1,0 +1,75 @@
+<dom-module id="gs-console">
+  <template>
+    <style>
+      :host {
+        padding: 10px;
+        font-family: "Courier New";
+        line-height: 25px;
+        word-break: break-all;
+      }
+      :host .consoleContent {
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+      }
+      :host .default {
+        color: black;
+      }
+      :host .success {
+        color: #5cb85c;
+      }
+      :host .warning {
+        color: #f0ad4e;
+      }
+      :host .info {
+        color: #5bc0de;
+      }
+      :host .error {
+        color: #d9534f;
+      }
+
+    </style>
+
+    <div class="consoleContent">
+      <template is="dom-repeat" items="{{_msgs}}" as="msg">
+        <div>
+          <span class$="{{msg.type}}"> {{msg.text}}</span> 
+        </div>
+      </template>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-console',
+      properties: {
+        _types: {
+          type: [],
+          value: ["success", "error", "warning", "info"]
+        },
+        _msgs: {
+          type: [],
+          value: []
+        }
+      },
+      log: function(message) {
+        message = message || {};
+        if (message.text && message.text.length) {
+          if ((this._types.indexOf(message.type)) === -1) {
+            message.type = "default";
+          }
+          message.text = "-> " + message.text;
+          return this._powerfulLog(message);
+        } else {
+          return console.log({
+            error: 'Me acaban de pasar un mensaje desconocido',
+            msg: message
+          });
+        }
+      },
+      _powerfulLog: function(message) {
+        return this.push('_msgs', message);
+      }
+    });
+
+  </script>
+</dom-module>

@@ -1,0 +1,7 @@
+{
+  "name": "dom-inject-repeat-demo",
+  "imports": [
+    "dom-inject-simple-example.html",
+    "../../dom-inject.html"
+  ]
+}

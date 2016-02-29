@@ -1,0 +1,138 @@
+<link rel="import" href="gs-console.html">
+<link rel="import" href="../../../paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../../paper-button/paper-button.html">
+<dom-module id="gs-console-demo">
+  <template>
+    <style>
+      #demo-header {
+        margin-left: 30%;
+        background-color: #ED1C24;
+        display: table;
+        font-size: 1.5em;
+        border-radius: 5px;
+        width: 40vw;
+        text-align: center;
+      }
+
+      gs-console {
+        width: 40vw;
+        height: 40vh;
+        background-color: white;
+        display: table;
+        border-radius: 10px;
+        margin-left: 29.5vw;
+      }
+
+      #formPanel {
+        width: 25vw;
+        float: left;
+      }
+      #formPanel > * {
+        float: left;
+        clear: left;
+        margin-bottom: 1vh;
+      }
+      #formPanel paper-button {
+        background-color: #17D04A;
+        float: left;
+        clear: left;
+      }
+
+      #onRadio {
+        top: 3px;
+        left: 3px;
+      }
+
+      paper-radio-group {
+        display: flex;
+        flex-flow: column;
+      }
+      paper-radio-group paper-radio-button {
+        padding: 2px;
+      }
+
+      #msg {
+        max-width: 20vw;
+        width: 20vw;
+      }
+
+      #formPanel {
+        margin-left: 2vw;
+      }
+
+      #radioLabel {
+        font-size: x-large;
+        font-style: italic;
+      }
+
+    </style>
+
+    <p id="demo-header">An example of <br> <code>&lt;gs-console&gt;</code>:</p>
+
+    <div id="formPanel">
+      <div id="radioLabel">Select Type of Message</div>
+      <paper-radio-group selected="default" id="msgStyle">
+        <paper-radio-button name="default">Default</paper-radio-button>
+        <paper-radio-button name="success">Success</paper-radio-button>
+        <paper-radio-button name="info">Info</paper-radio-button>
+        <paper-radio-button name="warning">Warning</paper-radio-button>
+        <paper-radio-button name="error">Error</paper-radio-button>
+      </paper-radio-group>
+
+      <paper-button id="sendMsg">Send =></paper-button>
+
+      <textarea id="msg" placeholder="Add text" rows="4" cols="30"></textarea>
+    </div>
+
+    <gs-console id="console">
+
+    </gs-console>
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-console-demo',
+      attached: function() {
+        this.gsConsole = this.$.console;
+        this.snMsg = this.$.sendMsg;
+        this.msg = this.$.msg;
+        this.msgStyle = this.$.msgStyle;
+        this.gsConsole.log({
+          text: "Hello I'am Gobstones Console and this a success msg",
+          type: "success"
+        });
+        this.gsConsole.log({
+          text: "You can send error msgs,",
+          type: "error"
+        });
+        this.gsConsole.log({
+          text: "warning msgs,",
+          type: "warning"
+        });
+        this.gsConsole.log({
+          text: "info msg,",
+          type: "info"
+        });
+        this.gsConsole.log({
+          text: "and default msg.",
+          type: "default"
+        });
+        this.gsConsole.log({
+          text: "-",
+          type: "default"
+        });
+        this.gsConsole.log({
+          text: "Also you may send big msgs. This for example, if i put asdasdasdasdasd become a big msg.",
+          type: "default"
+        });
+        return this.listen(this.$.sendMsg, 'tap', 'onTap');
+      },
+      onTap: function(event) {
+        return this.gsConsole.log({
+          text: this.msg.value,
+          type: this.msgStyle.selected
+        });
+      }
+    });
+
+  </script>
+</dom-module>

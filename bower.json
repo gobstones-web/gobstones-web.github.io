@@ -21,7 +21,8 @@
   ],
   "dependencies": {
     "gs-common": "~0.0.1-pre",
-    "gs-tablero": "~0.0.0-alpha"
+    "gs-tablero": "~0.0.0-alpha",
+    "gs-console": "~0.0.0-pre"
   },
   "resolutions": {
     "polymer": "^1.2.1"

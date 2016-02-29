@@ -1,0 +1,40 @@
+<dom-module id="dom-inject-simple-example">
+  <template>
+    <style>
+      :host {
+        width: 200px;
+        height: 50px;
+        background-color: red;
+        display: block;
+      }
+      :host.red {
+        background-color: red;
+      }
+      :host.orange {
+        background-color: orange;
+      }
+      :host.blue {
+        background-color: blue;
+      }
+      :host.green {
+        background-color: green;
+      }
+      :host.pink {
+        background-color: #F88;
+      }
+
+    </style>
+
+    <div class="level-one">
+      <div class="level-two">
+        dom-inject nested example
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'dom-inject-simple-example'
+    });
+
+  </script>
+</dom-module>

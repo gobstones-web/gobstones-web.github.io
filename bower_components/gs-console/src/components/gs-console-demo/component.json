@@ -1,0 +1,8 @@
+{
+  "name": "gs-console-demo",
+  "imports": [
+    "gs-console.html",
+    "../../../paper-radio-group/paper-radio-group.html",
+    "../../../paper-button/paper-button.html"
+  ]
+}
