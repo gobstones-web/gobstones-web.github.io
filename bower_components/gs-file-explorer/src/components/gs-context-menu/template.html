@@ -1,0 +1,10 @@
+<template is="dom-if" if="{{toggleContextMenu}}">
+  <div id="contextBox">
+    <ul class="listContainer">
+        <template is="dom-repeat" items={{_options}} as="option">
+            <gs-item-list option={{option}}> </gs-item-list>
+        </template>
+    </ul>
+
+  </div>
+</template>

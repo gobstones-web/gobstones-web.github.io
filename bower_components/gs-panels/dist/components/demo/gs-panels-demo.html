@@ -1,0 +1,290 @@
+<link rel="import" href="../gs-panel-root.html">
+<link rel="import" href="gs-panels-demo-item.html">
+<link rel="import" href="gs-panels-demo-item-flex.html">
+<link rel="import" href="../../../../iron-icon/iron-icon.html">
+<link rel="import" href="../../../../iron-icons/iron-icons.html">
+<link rel="import" href="../../../../iron-input/iron-input.html">
+<link rel="import" href="../../../../paper-menu/paper-menu.html">
+<link rel="import" href="../../../../paper-item/paper-item.html">
+<link rel="import" href="../../../../paper-button/paper-button.html">
+<link rel="import" href="../../../../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../../../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../../paper-checkbox/paper-checkbox.html">
+<dom-module id="gs-panels-demo">
+  <template>
+    <style>
+      :host .header {
+        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        float: left;
+      }
+      :host .header .tree-container {
+        float: left;
+        width: 50%;
+      }
+      :host .header .tree-container > textarea {
+        width: 80%;
+        height: 180px;
+      }
+      :host .header .controls {
+        box-sizing: initial;
+        float: left;
+        width: 50%;
+      }
+      :host .header .controls .class-options {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding: 0;
+      }
+      :host .header .controls .class-options paper-button {
+        padding-top: 3px;
+        padding-bottom: 0px;
+        margin: 0;
+      }
+      :host .header .controls .class-options paper-button iron-icon {
+        margin-top: -5px;
+      }
+      :host .header .controls .class-options paper-item {
+        cursor: pointer;
+      }
+      :host .header .controls .class-options .iron-selected:focus:after,
+      :host .header .controls .class-options .iron-selected:focus:before {
+        background-color: transparent;
+        opacity: 0;
+      }
+      :host .header .controls .class-options .red {
+        color: white;
+        background-color: #F20;
+      }
+      :host .header .controls .class-options .red:hover {
+        background-color: #F40;
+      }
+      :host .header .controls .class-options .green {
+        background-color: #0B0;
+      }
+      :host .header .controls .class-options .green:hover {
+        background-color: #0D0;
+      }
+      :host .header .controls .class-options .blue {
+        color: white;
+        background-color: #04F;
+      }
+      :host .header .controls .class-options .blue:hover {
+        background-color: #06F;
+      }
+      :host .panels-wrapper {
+        margin: 20px;
+        float: left;
+      }
+      :host .left-block {
+        height: 200px;
+        width: 200px;
+        background-color: green;
+        float: left;
+      }
+      :host .under {
+        width: 100%;
+        clear: both;
+      }
+
+    </style>
+
+
+
+    <div class="header">
+      <div class="controls">
+        <span>Container Width (0 = 100%): </span><br/>
+        <input is="iron-input" bind-value="{{mainWidth}}" /><br/>
+        <span>Container Height (0 = auto, current min-heigth = 20px): </span><br/>
+        <input is="iron-input" bind-value="{{mainHeight}}" /><br/>
+        <paper-checkbox checked="{{showLeftBlock}}">Show left block</paper-checkbox><br/>
+        
+        <paper-menu-button class="class-options">
+          <paper-button class$="dropdown-trigger {{nextClass}}" raised>
+            <iron-icon icon="check"></iron-icon>
+            <span>{{nextClass}}</span>
+          </paper-button>
+          <paper-menu class="dropdown-content" selected="{{nextClassIndex}}">
+            <template is="dom-repeat" items="{{classOptions}}">
+              <paper-item class$="{{item}}">{{item}}</paper-item>
+            </template>
+          </paper-menu>
+        </paper-menu-button>
+        <paper-checkbox checked="{{changeClassAuto}}">Change Auto</paper-checkbox><br/>
+        
+        <span>Add into: </span>
+        <input is="iron-input" bind-value="{{parentId}}" />
+        <span>(empty = #main)</span><br/>
+        
+        <span>Identifier: </span>
+        <input is="iron-input" bind-value="{{nextId}}" /><br/>
+        <button id="panelSimple" >add simple panel</button>
+        <button id="panelComplex" >add complex panel</button>
+        <button id="panelVertical" >add vertical panel</button>
+        <button id="panelHorizontal" >add horizontal panel</button>
+      </div>
+      <div class="tree-container">
+        <textarea value="{{treeModel::input}}" disabled="true"></textarea>
+      </div>
+    </div>
+
+    <template is="dom-if" if="{{showLeftBlock}}">
+      <div class="left-block"></div>
+    </template>
+    <div class="panels-wrapper">
+      <gs-panel-root id="gsPanels" debug="true"></gs-panel-root>
+    </div>
+    <div class="under">Under panels page control</div>
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-panels-demo',
+      properties: {
+        mainWidth: {
+          type: Number,
+          observer: '_main_width_change'
+        },
+        mainHeight: {
+          type: Number,
+          observer: '_main_height_change'
+        },
+        nextClass: {
+          type: String
+        },
+        nextClassIndex: {
+          type: Number,
+          value: 0,
+          observer: '_next_class_index_change'
+        },
+        changeClassAuto: {
+          type: Boolean,
+          value: true
+        },
+        classOptions: {
+          type: Array,
+          value: ['red', 'green', 'blue']
+        },
+        treeModel: {
+          type: String,
+          value: ''
+        },
+        parentId: {
+          type: String,
+          value: ''
+        },
+        nextId: {
+          type: String,
+          value: ''
+        }
+      },
+      listeners: {
+        'panelSimple.tap': '_add_panel_simple',
+        'panelComplex.tap': '_add_panel_complex',
+        'panelVertical.tap': '_add_panel_vertical',
+        'panelHorizontal.tap': '_add_panel_horizontal',
+        'GS_PANELS_CHANGE': 'update_tree'
+      },
+      ready: function() {
+        var panels;
+        this.nextClass = this.classOptions[this.nextClassIndex];
+        return this.panels = panels = this.$.gsPanels;
+      },
+      generate_horizontal: function(hlevel, item_even) {
+        var item_index, items, vlevel, _i, _len, _ref, _results;
+        items = ['gs-panels-demo-item', 'gs-panels-demo-item-flex'];
+        item_index = item_even % items.length;
+        this.panels.add_horizontal(hlevel);
+        _ref = ['LEFT', 'CENTER', 'RIGHT'];
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          vlevel = _ref[_i];
+          this._add_panel({
+            component_name: items[item_index],
+            self_id: hlevel + '_' + vlevel,
+            parent_id: hlevel,
+            klass: this.nextClass
+          });
+          item_index = item_index === (items.length - 1) ? 0 : item_index + 1;
+          _results.push(this._change_class_index());
+        }
+        return _results;
+      },
+      attached: function() {
+        var hlevel, index, _i, _len, _ref, _results;
+        _ref = ['TOP', 'MIDDLE', 'BOTTOM'];
+        _results = [];
+        for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
+          hlevel = _ref[index];
+          _results.push(this.generate_horizontal(hlevel, index));
+        }
+        return _results;
+      },
+      _next_class_index_change: function() {
+        return this.classOptions && (this.nextClass = this.classOptions[this.nextClassIndex]);
+      },
+      _change_class_index: function() {
+        var nextClassIndex;
+        if (this.changeClassAuto) {
+          nextClassIndex = this.nextClassIndex + 1;
+          if (nextClassIndex >= this.classOptions.length) {
+            nextClassIndex = 0;
+          }
+          return this.nextClassIndex = nextClassIndex;
+        }
+      },
+      update_tree: function() {
+        return this.treeModel = JSON.stringify(this.panels.get_children_tree(), null, '  ');
+      },
+      _add_panel: function(cfg) {
+        var item;
+        item = document.createElement(cfg.component_name);
+        item.elementClasses = cfg.klass;
+        item.elementName = cfg.self_id;
+        this.panels.add(item, cfg.self_id, cfg.parent_id);
+        return this.update_tree();
+      },
+      _add_form_panel: function(component_name) {
+        this._add_panel({
+          component_name: component_name,
+          self_id: this.nextId,
+          parent_id: this.parentId,
+          klass: this.nextClass
+        });
+        return this._change_class_index();
+      },
+      _add_panel_simple: function() {
+        return this._add_form_panel('gs-panels-demo-item');
+      },
+      _add_panel_complex: function() {
+        return this._add_form_panel('gs-panels-demo-item-flex');
+      },
+      _add_panel_vertical: function() {
+        this.panels.add_vertical(this.nextId, this.parentId);
+        return this.update_tree();
+      },
+      _add_panel_horizontal: function() {
+        this.panels.add_horizontal(this.nextId, this.parentId);
+        return this.update_tree();
+      },
+      _is_numeric: function(value) {
+        return !isNaN(value) && value !== '';
+      },
+      _main_width_change: function() {
+        if (this._is_numeric(this.mainWidth)) {
+          return this.panels && (this.panels.style.width = this.mainWidth + 'px');
+        } else {
+          return this.panels && (this.panels.style.width = '100%');
+        }
+      },
+      _main_height_change: function() {
+        if (this._is_numeric(this.mainHeight)) {
+          return this.panels && (this.panels.style.height = this.mainHeight + 'px');
+        } else {
+          return this.panels && (this.panels.style.height = 'auto');
+        }
+      }
+    });
+
+  </script>
+</dom-module>

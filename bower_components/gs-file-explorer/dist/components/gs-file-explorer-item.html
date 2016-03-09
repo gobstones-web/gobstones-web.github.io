@@ -1,0 +1,81 @@
+<dom-module id="gs-file-explorer-item">
+  <template>
+    <style>
+      :host {
+        cursor: pointer;
+        font-size: 1em;
+      }
+
+      /*# sourceMappingURL=style.css.map */
+
+    </style>
+
+    <i class="fa fa-file-o"></i><a> {{file.name}}<a>
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-file-explorer-item',
+      listeners: {
+        'contextmenu': 'openMenu',
+        'tap': 'openFile'
+      },
+      properties: {
+        file: {
+          type: {},
+          value: {}
+        }
+      },
+      generateOptions: function() {
+        var self;
+        if (this.options) {
+          return;
+        }
+        self = this;
+        return this.options = [
+          {
+            name: 'Open',
+            action: function() {
+              return self.fire('openFile', {
+                file: self.file
+              });
+            }
+          }, {
+            name: 'Remove',
+            action: function() {
+              return self.fire('removeFile', {
+                file: self.file
+              });
+            }
+          }, {
+            name: 'Duplicate',
+            action: function() {
+              return self.fire('duplicateFile', {
+                file: self.file
+              });
+            }
+          }, {
+            name: 'Rename',
+            action: function() {
+              return self.fire('renameFile', {
+                file: self.file
+              });
+            }
+          }
+        ];
+      },
+      openFile: function() {
+        return this.fire('openFile', this);
+      },
+      openMenu: function(browser_event) {
+        this.generateOptions();
+        browser_event.preventDefault();
+        return this.fire('openGsContextMenu', {
+          file: this,
+          browserEventX: browser_event.x,
+          browserEventY: browser_event.y
+        });
+      }
+    });
+
+  </script>
+</dom-module>

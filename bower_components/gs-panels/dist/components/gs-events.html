@@ -1,0 +1,31 @@
+<dom-module id="gs-events">
+  <template>
+    <style>
+      
+    </style>
+
+
+  </template>
+  <script>
+    if (typeof window.GS === 'undefined') {
+      window.GS = {};
+    }
+
+    GS.EVENTS = GS.EVENTS || {};
+
+    GS.EVENTS.RESIZE_BEGIN = 'GS_RESIZE_BEGIN';
+
+    GS.EVENTS.CHILD_RESIZE_BEGIN = 'GS_CHILD_RESIZE_BEGIN';
+
+    GS.EVENTS.CHILD_RESIZE = 'GS_CHILD_RESIZE';
+
+    GS.EVENTS.CHILD_RESIZE_FINISH = 'GS_CHILD_RESIZE_FINISH';
+
+    GS.EVENTS.CHILD_REMOVE = 'GS_CHILD_REMOVE';
+
+    GS.EVENTS.UNREGISTER = 'GS_UNREGISTER';
+
+    GS.EVENTS.PANELS_CHANGE = 'GS_PANELS_CHANGE';
+
+  </script>
+</dom-module>

@@ -2,11 +2,20 @@
 
 Componentes comunes para el desarrollo de la aplicacion Gobstones-web
 
-###indice
+Version: 0.0.3
+
+### indice
 
 * [dom-iterate](#user-content-dom-iterate) 
 * [dom-inject](#user-content-dom-inject) 
 
+### deploy
+
+```
+npm update
+bower update
+grunt server
+```
 
 ##<div name="dom-iterate">dom-iterate</div>
 

@@ -1,0 +1,8 @@
+{
+  "name": "gs-panel-root",
+  "imports": [
+    "gs-panel-composite.html",
+    "gs-panel-resize.html",
+    "gs-rezisable.html"
+  ]
+}

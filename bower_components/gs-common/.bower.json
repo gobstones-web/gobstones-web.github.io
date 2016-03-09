@@ -1,6 +1,6 @@
 {
   "name": "gs-common",
-  "version": "0.0.2-r",
+  "version": "0.0.4-r",
   "authors": [
     "alejandrocastrounqui <alejandrocastrounqui@gmail.com>"
   ],
@@ -25,13 +25,13 @@
     "iron-checked-element-behavior": "polymerelements/iron-checked-element-behavior#~1.0.4",
     "paper-checkbox": "PolymerElements/paper-checkbox#~1.1.2"
   },
-  "_release": "0.0.2-r",
+  "_release": "0.0.4-r",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.2-r",
-    "commit": "9ffbdfb82f465251a54f28a998409623790a01cb"
+    "tag": "0.0.4-r",
+    "commit": "162c35ae851940b5b34a79bcd2ca80037cae68b0"
   },
   "_source": "git://github.com/gobstones/gs-common.git",
-  "_target": "~0.0.1-pre",
+  "_target": "~0.0.4-r",
   "_originalSource": "gs-common"
 }

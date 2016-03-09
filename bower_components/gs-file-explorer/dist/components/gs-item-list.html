@@ -1,0 +1,47 @@
+<dom-module id="gs-item-list">
+  <template>
+    <style>
+      .item-link {
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      .item-link:hover {
+        background-color: #F82B5B;
+        transition: background-color 1000ms linear;
+      }
+
+      /*# sourceMappingURL=style.css.map */
+
+    </style>
+
+
+    <li on-tap="make_action" class="item-link">{{option.name}}</li>
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-item-list',
+      properties: {
+        option: {
+          type: {},
+          value: {}
+        }
+      },
+      listeners: {
+        'mousedown': 'avoidPropagation'
+      },
+      avoidPropagation: function(browserEvent) {
+        browserEvent.preventDefault();
+        return browserEvent.stopPropagation();
+      },
+      make_action: function() {
+        return this.fire('processOption', {
+          option: this.option
+        });
+      }
+    });
+
+  </script>
+</dom-module>

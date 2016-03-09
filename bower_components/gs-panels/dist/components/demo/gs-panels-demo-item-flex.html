@@ -1,0 +1,197 @@
+<dom-module id="gs-panels-demo-item-flex">
+  <template>
+    <style>
+      :host {
+        display: block;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+        position: relative;
+      }
+      :host .inline-content {
+        display: block;
+        overflow: hidden;
+      }
+      :host .inline-content .name {
+        font-size: 30px;
+      }
+      :host.red {
+        background-color: red;
+        color: white;
+      }
+      :host.blue {
+        background-color: blue;
+        color: white;
+      }
+      :host.green {
+        background-color: #0D0;
+      }
+      :host .top,
+      :host .bottom {
+        display: block;
+        height: 10px;
+        width: 100%;
+        background-color: #555;
+        position: absolute;
+      }
+      :host .top .left,
+      :host .top .right,
+      :host .bottom .left,
+      :host .bottom .right {
+        top: 0;
+        height: 10px;
+        width: 10px;
+        background-color: #333;
+        position: absolute;
+      }
+      :host .top .left,
+      :host .bottom .left {
+        left: 0;
+      }
+      :host .top .right,
+      :host .bottom .right {
+        right: 0;
+      }
+      :host .top {
+        top: 0;
+      }
+      :host .bottom {
+        bottom: 0;
+      }
+      :host .center {
+        height: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        background-color: transparent;
+      }
+      :host .center .left,
+      :host .center .right {
+        top: 0;
+        width: 10px;
+        height: 100%;
+        position: absolute;
+        background-color: #555;
+      }
+      :host .center .left {
+        left: 0;
+      }
+      :host .center .right {
+        right: 0;
+      }
+      :host .center .content {
+        width: 100%;
+        background-color: transparent;
+        overflow: hidden;
+      }
+
+    </style>
+
+    <div class="center">
+      <div class="left"></div>
+      <div class="content">
+        <div class="inline-content">
+          <p class="name">{{elementName}}</p>
+          <p>
+            <template is="dom-iterate" from="0" to="{{lines}}">
+              line: <span>{{index}}</span>  complex panel<br/>
+            </template>
+          </p>
+        </div>
+      </div>
+      <div class="right"></div>
+    </div>
+
+    <div class="top">
+      <div class="left"></div>
+      <div class="right"></div>
+    </div>
+    <div class="bottom">
+      <div class="left"></div>
+      <div class="right"></div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-panels-demo-item-flex',
+      properties: {
+        elementName: {
+          type: String,
+          value: 'unknow'
+        },
+        elementClasses: {
+          type: String,
+          value: 'unknow',
+          observer: '_update'
+        },
+        lines: {
+          type: Number,
+          value: 10
+        }
+      },
+      created: function() {
+        return this._elementClasses = [];
+      },
+      ready: function() {
+        return this._update();
+      },
+      _kleasses: function() {
+        var elementClass, next, _i, _len, _ref;
+        next = [];
+        if (!this.elementClasses || typeof this.elementClasses !== 'string') {
+          return next;
+        }
+        _ref = this.elementClasses.split(/\s+/);
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          elementClass = _ref[_i];
+          if (!/^\s*$/.test(elementClass)) {
+            next.push(elementClass);
+          }
+        }
+        return next;
+      },
+      _add: function(klasses) {
+        var klass, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = klasses.length; _i < _len; _i++) {
+          klass = klasses[_i];
+          _results.push(this.classList.add(klass));
+        }
+        return _results;
+      },
+      _remove: function(klasses) {
+        var klass, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = klasses.length; _i < _len; _i++) {
+          klass = klasses[_i];
+          _results.push(this.classList.remove(klass));
+        }
+        return _results;
+      },
+      _update: function() {
+        var add, index, klass, next, remove, _i, _j, _len, _len1, _ref;
+        remove = [];
+        add = [];
+        next = this._kleasses();
+        _ref = this._elementClasses;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          klass = _ref[_i];
+          index = next.indexOf(klass);
+          if (index === -1) {
+            remove.push(klass);
+          }
+        }
+        for (_j = 0, _len1 = next.length; _j < _len1; _j++) {
+          klass = next[_j];
+          index = this._elementClasses.indexOf(klass);
+          if (index === -1) {
+            add.push(klass);
+          }
+        }
+        this._elementClasses = next;
+        this._remove(remove);
+        return this._add(add);
+      }
+    });
+
+  </script>
+</dom-module>

@@ -1,0 +1,36 @@
+{
+  "name": "gs-file-explorer",
+  "version": "0.0.0-pre",
+  "authors": [
+    "Nazareno Castro <nazarenomartincastro@gmail.com>"
+  ],
+  "description": "",
+  "main": "dist/index.html",
+  "keywords": [
+    "polymer",
+    "gobstones"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "components-font-awesome": "^4.5.0"
+  },
+  "_release": "0.0.0-pre",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.0-pre",
+    "commit": "1bd21c11838ef4cb1feb458d85b76335f2dec7b8"
+  },
+  "_source": "git://github.com/gobstones/gs-file-explorer.git",
+  "_target": "~0.0.0-pre",
+  "_originalSource": "gs-file-explorer",
+  "_direct": true
+}

@@ -9,32 +9,43 @@
   <script>
     Polymer({
       is: 'dom-inject',
+      "extends": 'template',
       properties: {
         element: {
           type: Object,
-          observer: '_update'
+          observer: '_element_change'
         }
       },
       created: function() {},
-      ready: function() {
+      attached: function() {
+        this.be_detached = false;
+        return this._update();
+      },
+      detached: function() {
+        this.be_detached = true;
         return this._update();
       },
       _reject: function() {
-        if (this._instance) {
-          Polymer.dom(this).parentNode.removeChild(this._instance);
+        if (this._instance && this._instance.parentNode) {
+          this._instance.parentNode.removeChild(this._instance);
         }
         return this._instance = void 0;
       },
-      _inject: function(element) {
-        Polymer.dom(this).parentNode.appendChild(element);
+      _inject: function() {
+        Polymer.dom(Polymer.dom(this).parentNode).insertBefore(this.element, this);
         return this._instance = this.element;
       },
       _update: function() {
-        if (this.element !== this._instance) {
-          this._reject();
-          if (typeof this.element === 'object' && this.element instanceof HTMLElement) {
-            return this._inject(this.element);
-          }
+        if (!this.be_detached) {
+          return this._inject();
+        } else {
+          return this._reject();
+        }
+      },
+      _element_change: function() {
+        this._reject();
+        if (typeof this.element === 'object' && this.element instanceof HTMLElement) {
+          return this._update();
         }
       }
     });

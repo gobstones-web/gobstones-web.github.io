@@ -1,0 +1,79 @@
+<link rel="import" href="gs-file-explorer-item.html">
+<link rel="import" href="gs-context-menu.html">
+<dom-module id="gs-file-explorer">
+  <template>
+    <style>
+      .listContainer {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        margin-top: 4px;
+        margin-bottom: 4px;
+      }
+
+      :host {
+        overflow: hidden;
+      }
+
+      .fileItem:hover {
+        font-weight: bold;
+      }
+
+      /*# sourceMappingURL=style.css.map */
+
+    </style>
+
+    <div>
+
+       <ul class="listContainer">
+          <template is="dom-repeat" items="{{files}}" as="file">
+             <li class="fileItem"> 
+              <gs-file-explorer-item file={{file}}> </gs-file-explorer-item>
+             </li>
+          </template>
+        </ul>
+
+    </div>
+
+    <gs-context-menu id="optionsMenu"> </gs-context-menu>
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-file-explorer',
+      properties: {
+        files: {
+          type: [],
+          value: []
+        }
+      },
+      listeners: {
+        'openGsContextMenu': 'displayOptions',
+        'processOption': 'makeAction'
+      },
+      makeAction: function(polymerEvent) {
+        var option;
+        option = polymerEvent.detail.option;
+        option.action();
+        return this.closeOptions();
+      },
+      created: function() {
+        return this.closeOptions = (function(_this) {
+          return function() {
+            _this.contextMenu.hideMenu();
+            return document.removeEventListener('mousedown', _this.closeOptions);
+          };
+        })(this);
+      },
+      attached: function() {
+        return this.contextMenu = this.$.optionsMenu;
+      },
+      displayOptions: function(polymerEvent) {
+        this.contextMenu.addOptions(polymerEvent.detail.file.options);
+        this.contextMenu.showMenu(polymerEvent.detail.browserEventX, polymerEvent.detail.browserEventY);
+        document.addEventListener('mousedown', this.closeOptions);
+        return polymerEvent.preventDefault();
+      }
+    });
+
+  </script>
+</dom-module>

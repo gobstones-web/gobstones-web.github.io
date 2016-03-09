@@ -1,0 +1,64 @@
+<link rel="import" href="gs-item-list.html">
+<dom-module id="gs-context-menu">
+  <template>
+    <style>
+      :host {
+        position: absolute;
+      }
+
+      #contextBox {
+        opacity: 1;
+        transition: opacity 1s linear;
+        background-color: white;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+      }
+
+      .listContainer {
+        margin: 0px;
+        padding: 0;
+        list-style-type: none;
+      }
+
+      /*# sourceMappingURL=style.css.map */
+
+    </style>
+
+    <template is="dom-if" if="{{toggleContextMenu}}">
+      <div id="contextBox">
+        <ul class="listContainer">
+            <template is="dom-repeat" items={{_options}} as="option">
+                <gs-item-list option={{option}}> </gs-item-list>
+            </template>
+        </ul>
+
+      </div>
+    </template>
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-context-menu',
+      properties: {
+        _options: {
+          type: [],
+          value: []
+        },
+        toggleContextMenu: {
+          type: Boolean,
+          value: false
+        }
+      },
+      addOptions: function(options) {
+        return this._options = options;
+      },
+      showMenu: function(offSetLeft, offSetTop) {
+        this.toggleContextMenu = true;
+        this.style.left = offSetLeft + 2 + "px";
+        return this.style.top = offSetTop + 2 + "px";
+      },
+      hideMenu: function() {
+        return this.toggleContextMenu = false;
+      }
+    });
+
+  </script>
+</dom-module>

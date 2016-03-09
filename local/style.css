@@ -28,6 +28,13 @@
 .demo .demo-item.purple {
   background-color: #9c27b0;
 }
+.demo .demo-item.orange {
+  background-color: #ff5722;
+}
+.demo .demo-item.amber {
+  background-color: #ffc107;
+  color: #555;
+}
 
 
 

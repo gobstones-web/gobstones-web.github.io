@@ -1,0 +1,80 @@
+<link rel="import" href="gs-events.html">
+<dom-module id="gs-panel-resize">
+  <template>
+    <style>
+      :host {
+        position: absolute;
+        display: block;
+        background-color: #A9A9AA;
+      }
+      :host .points {
+        color: #333333;
+      }
+      :host:hover {
+        background-color: #F1F1F1;
+      }
+      :host:hover .points {
+        color: #505050;
+      }
+      :host.vertical {
+        clear: both;
+        height: 7px;
+        width: 100%;
+        text-align: center;
+        overflow-y: hidden;
+        line-height: 0.3px;
+        cursor: s-resize;
+        bottom: 0;
+      }
+      :host.vertical .points > span {
+        letter-spacing: -3px;
+      }
+      :host.horizontal {
+        text-align: center;
+        top: 0;
+        right: 0;
+        width: 7px;
+        height: 100%;
+        display: block;
+        cursor: e-resize;
+      }
+      :host.horizontal .points {
+        position: absolute;
+        top: 50%;
+        margin-top: -6px;
+        display: block;
+        text-align: center;
+        line-height: 0.3;
+      }
+      :host.main {
+        position: relative;
+      }
+
+    </style>
+
+    <span class="points">
+    <span>.</span>
+    <span>.</span>
+    <span>.</span>
+    </span>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-panel-resize',
+      listeners: {
+        'mousedown': '_mousedown'
+      },
+      _mousedown: function(evnt) {
+        if (evnt.which !== 1) {
+          return;
+        }
+        return this.fire(GS.EVENTS.RESIZE_BEGIN, {
+          clientX: evnt.clientX,
+          clientY: evnt.clientY
+        });
+      }
+    });
+
+  </script>
+</dom-module>

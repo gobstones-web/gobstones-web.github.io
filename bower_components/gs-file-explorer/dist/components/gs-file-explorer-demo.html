@@ -1,0 +1,88 @@
+<link rel="import" href="gs-file-explorer.html">
+<dom-module id="gs-file-explorer-demo">
+  <template>
+    <style>
+      #demo-header {
+        margin-left: 30%;
+        background-color: #0052A0;
+        display: table;
+        font-size: 1.5em;
+        border-radius: 5px;
+        width: 40vw;
+        text-align: center;
+      }
+
+      #explorer {
+        padding: 10px;
+        width: 20vw;
+        height: 10vh;
+        background-color: #EAC616;
+        display: table;
+        border-radius: 10px;
+        margin-left: 29.5vw;
+      }
+
+      #mirrorExplorer {
+        margin-top: 2vh;
+        padding: 10px;
+        width: 20vw;
+        height: 10vh;
+        background-color: #EAC616;
+        display: table;
+        border-radius: 10px;
+        margin-left: 29.5vw;
+      }
+
+      /*# sourceMappingURL=style.css.map */
+
+    </style>
+
+    <p id="demo-header">An example of <br> <code>&lt;gs-file-explorer&gt;</code>:</p>
+
+
+    <gs-file-explorer files={{files}} id="explorer"></gs-file-explorer>
+
+    <gs-file-explorer files={{files}} id="mirrorExplorer"></gs-file-explorer>
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-file-explorer-demo',
+      listeners: {
+        'openFile': 'openFile',
+        'removeFile': 'removeFile',
+        'duplicateFile': 'duplicateFile',
+        'renameFile': 'renameFile'
+      },
+      attached: function() {
+        var index, script, style;
+        this.fileExplorer = this.$.explorer;
+        this.mirrorExplorer = this.$.mirrorExplorer;
+        index = {
+          name: "index.html",
+          content: "content"
+        };
+        style = {
+          name: "style.css",
+          content: "content"
+        };
+        script = {
+          name: "script.js",
+          content: "content"
+        };
+        return this.files = [index, style, script];
+      },
+      removeFile: function(polymerEvent) {
+        return this.splice('files', polymerEvent.detail.file, 1);
+      },
+      duplicateFile: function(polymerEvent) {
+        var newFile;
+        newFile = {
+          name: polymerEvent.detail.file.name + "(2)",
+          content: polymerEvent.detail.file.content
+        };
+        return this.push('files', newFile);
+      }
+    });
+
+  </script>
+</dom-module>

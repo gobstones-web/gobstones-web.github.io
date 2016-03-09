@@ -1,0 +1,6 @@
+{
+  "name": "gs-file-explorer-demo",
+  "imports": [
+    "gs-file-explorer.html"
+  ]
+}

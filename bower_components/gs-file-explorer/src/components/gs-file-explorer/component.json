@@ -1,0 +1,7 @@
+{
+  "name": "gs-file-explorer",
+  "imports": [
+    "gs-file-explorer-item.html",
+    "gs-context-menu.html"
+  ]
+}

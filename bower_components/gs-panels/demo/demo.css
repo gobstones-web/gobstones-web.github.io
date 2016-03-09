@@ -1,0 +1,30 @@
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #b2ebf2;
+}
+
+#demo-header {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  text-align: center;
+}
+
+#panel-manager {
+  background-color: #ff7043;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  font-size: 1em;
+  font-style: italic;
+  width: 800px;
+  height: 500px;
+}
+
+#header {
+  background-color: #3F51B5;
+}

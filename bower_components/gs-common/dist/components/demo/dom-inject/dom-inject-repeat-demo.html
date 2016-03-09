@@ -37,7 +37,7 @@
             Element index:<span>{{itemIndex}}</span>
           </div>
           <div class="item">
-            <dom-inject element="{{simpleElement}}"></dom-inject>
+            <template is="dom-inject" element="{{simpleElement}}"></template>
           </div>
           <div class="close" on-click="removeItem" item="{{simpleElement}}">x</div>
         </div>

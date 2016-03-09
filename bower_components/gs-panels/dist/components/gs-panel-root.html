@@ -1,0 +1,194 @@
+<link rel="import" href="gs-panel-composite.html">
+<link rel="import" href="gs-panel-resize.html">
+<link rel="import" href="gs-rezisable.html">
+<dom-module id="gs-panel-root">
+  <template>
+    <style>
+      :host {
+        display: block;
+        width: 100%;
+        background-color: #BBB;
+      }
+      :host #heightFixer {
+        width: 100%;
+        min-height: 80px;
+      }
+      :host #onReziserFixer {
+        width: 100%;
+        clear: both;
+      }
+      :host .pull-bottom {
+        width: 100%;
+        clear: both;
+      }
+
+    </style>
+
+    <div id="heightFixer">
+      <gs-panel-composite 
+        id="main" 
+        panel-height="{{childHeight}}" 
+        parent-orientation="{{orientation}}"
+        identifier="main"
+        orientation="{{mainOrientation}}"
+      >
+      </gs-panel-composite>
+    </div>
+    <gs-panel-resize id="panelReziser" class="vertical main"></gs-panel-resize>
+    <div id="onReziserFixer"></div>
+    <div class="pull-bottom"></div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'gs-panel-root',
+      properties: {
+        debug: {
+          type: Object,
+          value: false,
+          observer: '_debug_change'
+        },
+        orientation: {
+          type: String,
+          value: GS.Rezisable.VERTICAL
+        },
+        mainOrientation: {
+          type: String,
+          value: GS.Rezisable.VERTICAL
+        },
+        rootHeight: {
+          type: Number
+        },
+        childHeight: {
+          type: Number,
+          observer: 'child_height_change'
+        }
+      },
+      listeners: (function() {
+        var listeners;
+        listeners = {};
+        listeners[GS.EVENTS.UNREGISTER] = '_unregister';
+        return listeners;
+      })(),
+      behaviors: [GS.Rezisable],
+      created: function() {
+        this.register = {
+          main: 1
+        };
+        return this.parentOrientation = GS.Rezisable.VERTICAL;
+      },
+      ready: function() {
+        this.main = this.$.main;
+        this.reziser = this.$.panelReziser;
+        this.fixer = this.$.heightFixer;
+        return this.onReziserFixer = this.$.onReziserFixer;
+      },
+      attached: function() {
+        var MAX_HEIGHT, maxHeight, resizer_h;
+        MAX_HEIGHT = 600;
+        resizer_h = this.reziser.clientHeight;
+        this.minHeightSupported = this.parse_px(this.molt(this.fixer).minHeight);
+        if (this.rootHeight) {
+          this.childHeight = this.rootHeight - resizer_h;
+          maxHeight = this.rootHeight + 'px';
+        } else {
+          if (this.minHeightSupported > MAX_HEIGHT) {
+            maxHeight = (this.minHeightSupported + resizer_h) + 'px';
+            this.childHeight = this.minHeightSupported;
+          } else {
+            maxHeight = (MAX_HEIGHT + resizer_h) + 'px';
+            this.childHeight = MAX_HEIGHT;
+          }
+        }
+        return this.style.maxHeight = maxHeight;
+      },
+      get_children_tree: function() {
+        return this.main.get_children_tree();
+      },
+      child_height_change: function() {
+        this.fixer.style.maxHeight = this.childHeight + 'px';
+        return this.main.panelHeight = this.childHeight;
+      },
+      _debug_change: function() {
+        if (!this.container) {
+          return;
+        }
+        if (this.debug) {
+          return this.container.classList.add('debug');
+        } else {
+          return this.container.classList.remove('debug');
+        }
+      },
+      begin_resize: function(context, evnt) {
+        context.minHeightPX = this.molt(this.fixer).minHeight;
+        context.reziserHeight = this.reziser.clientHeight;
+        context.initial_frame_heigth = this.clientHeight;
+        context.initial_mouse_y = evnt.detail.clientY;
+        context.resizer_fixer_height = screen.height - evnt.detail.clientY;
+        return this.style.transition = 'none';
+      },
+      resize: function(context, evnt) {
+        var nextHeight, next_resizer_height, y_delta;
+        y_delta = evnt.clientY - context.initial_mouse_y;
+        nextHeight = context.initial_frame_heigth + y_delta;
+        if (nextHeight > this.minHeightSupported) {
+          this.childHeight = nextHeight - context.reziserHeight;
+          this.fixer.style.minHeight = this.childHeight + 'px';
+          this.style.maxHeight = nextHeight + 'px';
+          next_resizer_height = context.resizer_fixer_height;
+          if (y_delta < 0) {
+            next_resizer_height -= y_delta;
+          }
+          return this.onReziserFixer.style.height = next_resizer_height + 'px';
+        }
+      },
+      finish_resize: function(context, evnt) {
+        this.fixer.style.minHeight = context.minHeightPX;
+        this.style.transition = '0.5s';
+        return this.onReziserFixer.style.height = '0px';
+      },
+      DuplicatedIdentifierError: (function() {
+        var error;
+        error = function(id) {
+          this.name = 'DuplicatedIdentifierError';
+          return this.message = "Duplicated Identifier supplied: [" + id + "]";
+        };
+        error.prototype = Error.prototype;
+        return error;
+      })(),
+      _unregister: function(polymer_event) {
+        var identifier;
+        identifier = polymer_event.detail.item.identifier;
+        if (identifier) {
+          delete this.register[identifier];
+        }
+        return this.fire(GS.EVENTS.PANELS_CHANGE);
+      },
+      add: function(element, item_id, parent_id) {
+        var created, parent;
+        parent = this.register[parent_id] || this.main;
+        if (item_id && this.register[item_id]) {
+          throw new this.DuplicatedIdentifierError(item_id);
+        }
+        created = parent.add_simple(element, item_id);
+        return item_id && (this.register[item_id] = created);
+      },
+      _add_composite: function(ori, item_id, parent_id) {
+        var created, parent;
+        parent = this.register[parent_id] || this.main;
+        if (item_id && this.register[item_id]) {
+          throw new this.DuplicatedIdentifierError(item_id);
+        }
+        created = parent.add_composite(ori, item_id);
+        return item_id && (this.register[item_id] = created);
+      },
+      add_vertical: function(item_id, parent_id) {
+        return this._add_composite(GS.Rezisable.VERTICAL, item_id, parent_id);
+      },
+      add_horizontal: function(item_id, parent_id) {
+        return this._add_composite(GS.Rezisable.HORIZONTAL, item_id, parent_id);
+      }
+    });
+
+  </script>
+</dom-module>

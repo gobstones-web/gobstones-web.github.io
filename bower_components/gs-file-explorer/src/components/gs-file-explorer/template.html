@@ -1,0 +1,13 @@
+<div>
+
+   <ul class="listContainer">
+      <template is="dom-repeat" items="{{files}}" as="file">
+         <li class="fileItem"> 
+          <gs-file-explorer-item file={{file}}> </gs-file-explorer-item>
+         </li>
+      </template>
+    </ul>
+
+</div>
+
+<gs-context-menu id="optionsMenu"> </gs-context-menu>
